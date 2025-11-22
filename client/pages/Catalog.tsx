@@ -298,12 +298,14 @@ export default function Catalog() {
                   <div className="relative">
                     <span className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 text-xs">$</span>
                     <input
-                      type="number"
-                      min="0"
-                      max={maxBudget}
-                      step="25000"
+                      type="text"
                       value={minBudget}
                       onChange={(e) => {
+                        const value = Number(e.target.value);
+                        setMinBudget(value);
+                        setMaxBudget(value + 200000);
+                      }}
+                      onBlur={(e) => {
                         const value = Math.max(0, Math.min(Number(e.target.value), maxBudget));
                         setMinBudget(value);
                       }}
@@ -313,12 +315,14 @@ export default function Catalog() {
                   <div className="relative">
                     <span className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 text-xs">$</span>
                     <input
-                      type="number"
-                      min={minBudget}
-                      max="15000000"
-                      step="25000"
+                      type="text"
                       value={maxBudget}
                       onChange={(e) => {
+                        const value = Number(e.target.value);
+                        setMaxBudget(value);
+                        setMinBudget(Math.max(0, value - 200000));
+                      }}
+                      onBlur={(e) => {
                         const value = Math.max(minBudget, Math.min(Number(e.target.value), 15000000));
                         setMaxBudget(value);
                       }}
